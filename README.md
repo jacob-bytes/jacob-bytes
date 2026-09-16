@@ -13,7 +13,7 @@ Rust · TypeScript ｜ 服务器监控与运维面板
 **[monitor-probe](https://github.com/monitor-probe) 二次开发** —— 给这套 Rust 探针重做公开状态页主题。四个仓库现已集中在 [**spot-probe**](https://github.com/spot-probe) 组织下。
 
 - **主题改造**：浅色语义配色（明暗两套，全部过 WCAG AA）、分组页签、筛选与列表视图、图表调色板重建、卡片与详情页重构 —— 已发布 [v1.3.0](https://github.com/spot-probe/monitor-theme-default/releases/tag/v1.3.0)
-- **工程化**：hub 已切到自己发布的主题版本，CI/CD 与发布流水线打通，3 个仓库产出 release 产物
+- **工程化**：hub 已切到自己发布的主题版本；CI/CD 与发布流水线打通，3 个仓库产出 release 产物；[组织 Overview 页](https://github.com/spot-probe) 写明了这里有什么与怎么协作
 - **顺手修的缺陷**：`install-hub.sh` 在 macOS 自带 bash 3.2 下会崩 —— 变量名紧跟中文全角标点时被解析错，导致**正常卸载路径直接中止**；已改为 `${var}` 显式界定
 
 ## 主题作品
