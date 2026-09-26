@@ -10,10 +10,11 @@ Rust · TypeScript ｜ 服务器监控与运维面板
 
 ## 当前在做什么
 
-**[monitor-probe](https://github.com/monitor-probe) 二次开发** —— 给这套 Rust 探针重做公开状态页主题。四个仓库现已集中在 [**spot-probe**](https://github.com/spot-probe) 组织下。
+**[monitor-probe](https://github.com/monitor-probe) 二次开发** —— 给这套 Rust 探针做二次开发（产品名 **Spot Monitor**），四个仓库集中在 [**spot-probe**](https://github.com/spot-probe) 组织下。
 
-- **主题改造**：浅色语义配色（明暗两套，全部过 WCAG AA）、分组页签、筛选与列表视图、图表调色板重建、卡片与详情页重构 —— 已发布 [v1.3.0](https://github.com/spot-probe/monitor-theme-default/releases/tag/v1.3.0)
-- **工程化**：hub 已切到自己发布的主题版本；CI/CD 与发布流水线打通，3 个仓库产出 release 产物；[组织 Overview 页](https://github.com/spot-probe) 写明了这里有什么与怎么协作
+- **主题改造**：浅色语义配色（明暗两套，全部过 WCAG AA）、分组页签、筛选与列表视图、图表调色板重建、卡片与详情页重构、可用率时间轴与故障历史 —— 已发布 [v1.5.1](https://github.com/spot-probe/monitor-theme-default/releases/tag/v1.5.1)
+- **工程化**：hub 已切到自己发布的主题版本（`web-theme.pin` 钉住 sha256）；CI/CD 与发布流水线打通，3 个仓库产出 release 产物；[组织 Overview 页](https://github.com/spot-probe) 写明了这里有什么与怎么协作
+- **文档站**：自建 Vite + React SSR 站点，全站按本 fork 的**实际行为**重写（hub 的添加节点判定、agent 的真实参数、可用率的「无数据 ≠ 离线」语义）—— <https://spot-probe-docs.hualala.workers.dev/>
 - **顺手修的缺陷**：`install-hub.sh` 在 macOS 自带 bash 3.2 下会崩 —— 变量名紧跟中文全角标点时被解析错，导致**正常卸载路径直接中止**；已改为 `${var}` 显式界定
 
 ## 主题作品
@@ -29,16 +30,16 @@ Rust · TypeScript ｜ 服务器监控与运维面板
 
 fork 自 [**monitor-probe**](https://github.com/monitor-probe) —— Rust 写的轻量服务器探针：agent 经 WebSocket / JSON-RPC 2.0 上报，hub 用 axum + SQLite 收下并出图。
 
-四个仓库集中在 [**spot-probe**](https://github.com/spot-probe)：`main` 保持上游镜像以便持续跟进上游的修复与新特性，自己的改动走分支。
+四个仓库集中在 [**spot-probe**](https://github.com/spot-probe)。**已不再跟随上游**（上游不再接受功能合入）：`main` 就是发布线，改动走分支经 PR 合入 —— 因此 `git merge --ff-only upstream/main` 已不适用，仓库不再是上游的纯镜像。
 
 | 项目 | 说明 | 语言 |
 |:--|:--|:--|
 | **[monitor](https://github.com/spot-probe/monitor)** | hub：后台、API、公开页宿主（axum + SQLite） | ![language](https://img.shields.io/github/languages/top/spot-probe/monitor?style=flat-square) |
 | **[agent](https://github.com/spot-probe/agent)** | Linux 采集端 | ![language](https://img.shields.io/github/languages/top/spot-probe/agent?style=flat-square) |
 | **[monitor-theme-default](https://github.com/spot-probe/monitor-theme-default)** | 公开状态页主题（Vite + React + TS） | ![language](https://img.shields.io/github/languages/top/spot-probe/monitor-theme-default?style=flat-square) |
-| **[monitor-document](https://github.com/spot-probe/monitor-document)** | 探针文档（MDX） | ![language](https://img.shields.io/github/languages/top/spot-probe/monitor-document?style=flat-square) |
+| **[monitor-document](https://github.com/spot-probe/monitor-document)** | 文档站（Vite + React SSR，构建时预渲染为静态站） | ![language](https://img.shields.io/github/languages/top/spot-probe/monitor-document?style=flat-square) |
 
-上游文档站：<https://monitor-document.pages.dev/>
+文档站：<https://spot-probe-docs.hualala.workers.dev/> ｜ 上游文档站（对照用）：<https://monitor-document.pages.dev/>
 
 > 语言徽章全部是**动态**的。GitHub 的 `language` 字段对 fork 返回 `null`（所以网页上那些 fork 不显示语言），但 shields.io 走的是 `/languages` 接口——**对 fork 同样有效**。用动态徽章就不必手工维护语言名，也不会随代码漂移。
 
