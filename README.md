@@ -12,7 +12,7 @@ Rust · TypeScript ｜ 服务器监控与运维面板
 
 **[monitor-probe](https://github.com/monitor-probe) 二次开发** —— 给这套 Rust 探针做二次开发（产品名 **Spot Monitor**），四个仓库集中在 [**spot-probe**](https://github.com/spot-probe) 组织下。
 
-- **主题改造**：浅色语义配色（明暗两套，全部过 WCAG AA）、分组页签、筛选与列表视图、图表调色板重建、卡片与详情页重构、可用率时间轴与故障历史 —— 已发布 [v1.5.1](https://github.com/spot-probe/monitor-theme-default/releases/tag/v1.5.1)
+- **主题改造**：浅色语义配色（明暗两套，全部过 WCAG AA）、分组页签、筛选与列表视图、图表调色板重建、资源图表的悬停卡片与十字线、卡片与详情页重构、可用率时间轴与故障历史 —— 已发布 [v1.6.0](https://github.com/spot-probe/monitor-theme-default/releases/tag/v1.6.0)
 - **工程化**：hub 已切到自己发布的主题版本（`web-theme.pin` 钉住 sha256）；CI/CD 与发布流水线打通，3 个仓库产出 release 产物；[组织 Overview 页](https://github.com/spot-probe) 写明了这里有什么与怎么协作
 - **文档站**：自建 Vite + React SSR 站点，全站按本 fork 的**实际行为**重写（hub 的添加节点判定、agent 的真实参数、可用率的「无数据 ≠ 离线」语义）—— <https://spot-probe-docs.hualala.workers.dev/>
 - **顺手修的缺陷**：`install-hub.sh` 在 macOS 自带 bash 3.2 下会崩 —— 变量名紧跟中文全角标点时被解析错，导致**正常卸载路径直接中止**；已改为 `${var}` 显式界定
