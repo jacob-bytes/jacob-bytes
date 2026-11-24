@@ -2,49 +2,48 @@
 
 # Jacob Brown
 
-Rust · TypeScript ｜ 服务器监控与运维面板
+Rust · TypeScript ｜ 自托管的运维工具：状态页、探针、内网工具
 
 </div>
 
 ---
 
-## 当前在做什么
-
-**[monitor-probe](https://github.com/monitor-probe) 二次开发** —— 给这套 Rust 探针做二次开发（产品名 **Spot Monitor**），四个仓库集中在 [**spot-probe**](https://github.com/spot-probe) 组织下。
-
-- **主题改造**：浅色语义配色（明暗两套，全部过 WCAG AA）、分组页签、筛选与列表视图、图表调色板重建、资源图表的悬停卡片与十字线、卡片与详情页重构、可用率时间轴与故障历史 —— 已发布 [v1.6.0](https://github.com/spot-probe/monitor-theme-default/releases/tag/v1.6.0)
-- **工程化**：hub 已切到自己发布的主题版本（`web-theme.pin` 钉住 sha256）；CI/CD 与发布流水线打通，3 个仓库产出 release 产物；[组织 Overview 页](https://github.com/spot-probe) 写明了这里有什么与怎么协作
-- **文档站**：自建 Vite + React SSR 站点，全站按本 fork 的**实际行为**重写（hub 的添加节点判定、agent 的真实参数、可用率的「无数据 ≠ 离线」语义）—— <https://spot-probe-docs.hualala.workers.dev/>
-- **顺手修的缺陷**：`install-hub.sh` 在 macOS 自带 bash 3.2 下会崩 —— 变量名紧跟中文全角标点时被解析错，导致**正常卸载路径直接中止**；已改为 `${var}` 显式界定
-
 ## 主题作品
 
-给 Komari Monitor 写的两套主题，均为 MIT。
+给 [Komari Monitor](https://github.com/elevenhq/komari-monitor) 写的两套状态页主题（Vue + Tailwind），均为 MIT。它们是我目前最常被用到的作品：
 
-| 项目 | 说明 | |
+| 项目 | 是什么 | |
 |:--|:--|:--|
-| **[komari-theme-ink](https://github.com/jacob-bytes/komari-theme-ink)** | shadcn 语言 · 深蓝黑 · 极简高级 · 双主题（黑 / 白） | ![stars](https://img.shields.io/github/stars/jacob-bytes/komari-theme-ink?style=flat-square&color=193cb8) ![language](https://img.shields.io/github/languages/top/jacob-bytes/komari-theme-ink?style=flat-square) |
-| **[komari-theme-blueprint](https://github.com/jacob-bytes/komari-theme-blueprint)** | 给 Komari Monitor 的一套「工程蓝图 · 运维图纸」主题 | ![stars](https://img.shields.io/github/stars/jacob-bytes/komari-theme-blueprint?style=flat-square&color=193cb8) ![language](https://img.shields.io/github/languages/top/jacob-bytes/komari-theme-blueprint?style=flat-square) |
+| **[komari-theme-ink](https://github.com/jacob-bytes/komari-theme-ink)** | shadcn 语言 · 深蓝黑 · 极简 · 明暗双主题 | ![stars](https://img.shields.io/github/stars/jacob-bytes/komari-theme-ink?style=flat-square&color=193cb8) |
+| **[komari-theme-blueprint](https://github.com/jacob-bytes/komari-theme-blueprint)** | 「工程蓝图 · 运维图纸」——把机房与线路画成一张可读的图 | ![stars](https://img.shields.io/github/stars/jacob-bytes/komari-theme-blueprint?style=flat-square&color=193cb8) |
 
-## 探针二次开发
+## 探针与工具
 
-fork 自 [**monitor-probe**](https://github.com/monitor-probe) —— Rust 写的轻量服务器探针：agent 经 WebSocket / JSON-RPC 2.0 上报，hub 用 axum + SQLite 收下并出图。
+**[spot-probe](https://github.com/spot-probe)** —— **此前的项目**：一套 Rust 写的服务器探针。hub（axum + SQLite）＋ 每台机器一个 agent ＋ 公开状态页主题 ＋ 文档站。fork 自 [monitor-probe](https://github.com/monitor-probe) 之后独立演进：`main` 就是发布线，改动走分支经 PR 合入。
 
-四个仓库集中在 [**spot-probe**](https://github.com/spot-probe)。**已不再跟随上游**（上游不再接受功能合入）：`main` 就是发布线，改动走分支经 PR 合入 —— 因此 `git merge --ff-only upstream/main` 已不适用，仓库不再是上游的纯镜像。
+- 延迟监控支持 TCP 与 ICMP；保留期可调到 365 天（分钟明细折叠成小时汇总）
+- 远程升级：agent 把发布公钥编进二进制，hub 经同一条已认证的 WebSocket 下发，验签通过才替换，失败回滚
+- 文档站按**实际行为**重写，不是抄上游：<https://spot-probe-docs.hualala.workers.dev/>
 
-| 项目 | 说明 | 语言 |
-|:--|:--|:--|
-| **[monitor](https://github.com/spot-probe/monitor)** | hub：后台、API、公开页宿主（axum + SQLite） | ![language](https://img.shields.io/github/languages/top/spot-probe/monitor?style=flat-square) |
-| **[agent](https://github.com/spot-probe/agent)** | Linux 采集端 | ![language](https://img.shields.io/github/languages/top/spot-probe/agent?style=flat-square) |
-| **[monitor-theme-default](https://github.com/spot-probe/monitor-theme-default)** | 公开状态页主题（Vite + React + TS） | ![language](https://img.shields.io/github/languages/top/spot-probe/monitor-theme-default?style=flat-square) |
-| **[monitor-document](https://github.com/spot-probe/monitor-document)** | 文档站（Vite + React SSR，构建时预渲染为静态站） | ![language](https://img.shields.io/github/languages/top/spot-probe/monitor-document?style=flat-square) |
+**[localcraft](https://github.com/jacob-bytes/localcraft)** —— 内网工具 / Skill 共享平台：上传 → 审批 → 发布 → 下载。systemd 原生部署，x86_64 / aarch64 **离线安装**，适合没有外网的内网环境。
+![stars](https://img.shields.io/github/stars/jacob-bytes/localcraft?style=flat-square&color=193cb8)
 
-文档站：<https://spot-probe-docs.hualala.workers.dev/> ｜ 上游文档站（对照用）：<https://monitor-document.pages.dev/>
+## 一条共同的思路
 
-> 语言徽章全部是**动态**的。GitHub 的 `language` 字段对 fork 返回 `null`（所以网页上那些 fork 不显示语言），但 shields.io 走的是 `/languages` 接口——**对 fork 同样有效**。用动态徽章就不必手工维护语言名，也不会随代码漂移。
+这些项目方向不同，做法一直是同一条：
+
+- **单二进制 + 一个 SQLite 文件**，能自托管、能离线装 —— 运维工具不该先变成一项运维工作
+- **被管的机器只往外连**，不给它开管理端口；能连出去就能被管
+- **下发期望状态，本地收敛**，失败可回滚，而不是远程执行一串命令
+- **发布物要能被验证**：静态构建、哈希与签名、安装脚本先验再换
+
+## 链接
+
+- 探针项目（组织）：<https://github.com/spot-probe>
+- 文档站：<https://spot-probe-docs.hualala.workers.dev/>
 
 ---
 
 <div align="center">
-<sub>本页列表是手写的；新增仓库不会自动出现在这里。</sub>
+<sub>本页是手写的；新仓库不会自动出现在这里。</sub>
 </div>
