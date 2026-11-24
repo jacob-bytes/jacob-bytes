@@ -23,7 +23,6 @@ Rust · TypeScript ｜ 自托管的运维工具：状态页、探针、内网工
 
 - 延迟监控支持 TCP 与 ICMP；保留期可调到 365 天（分钟明细折叠成小时汇总）
 - 远程升级：agent 把发布公钥编进二进制，hub 经同一条已认证的 WebSocket 下发，验签通过才替换，失败回滚
-- 文档站按**实际行为**重写，不是抄上游：<https://spot-probe-docs.hualala.workers.dev/>
 
 **[localcraft](https://github.com/jacob-bytes/localcraft)** —— 内网工具 / Skill 共享平台：上传 → 审批 → 发布 → 下载。systemd 原生部署，x86_64 / aarch64 **离线安装**，适合没有外网的内网环境。
 ![stars](https://img.shields.io/github/stars/jacob-bytes/localcraft?style=flat-square&color=193cb8)
