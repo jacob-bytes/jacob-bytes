@@ -28,15 +28,6 @@ Rust · TypeScript ｜ 自托管的运维工具：状态页、探针、内网工
 **[localcraft](https://github.com/jacob-bytes/localcraft)** —— 内网工具 / Skill 共享平台：上传 → 审批 → 发布 → 下载。systemd 原生部署，x86_64 / aarch64 **离线安装**，适合没有外网的内网环境。
 ![stars](https://img.shields.io/github/stars/jacob-bytes/localcraft?style=flat-square&color=193cb8)
 
-## 一条共同的思路
-
-这些项目方向不同，做法一直是同一条：
-
-- **单二进制 + 一个 SQLite 文件**，能自托管、能离线装 —— 运维工具不该先变成一项运维工作
-- **被管的机器只往外连**，不给它开管理端口；能连出去就能被管
-- **下发期望状态，本地收敛**，失败可回滚，而不是远程执行一串命令
-- **发布物要能被验证**：静态构建、哈希与签名、安装脚本先验再换
-
 ## 链接
 
 - 探针项目（组织）：<https://github.com/spot-probe>
